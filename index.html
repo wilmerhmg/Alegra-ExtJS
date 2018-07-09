@@ -6,42 +6,124 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=10, user-scalable=yes">
 
     <title>Alegra</title>
+    <style>
+        .detail-content {
+            width: 100%;
+        }
 
+        .detail-content h1 {
+            text-align: center;
+        }
+
+        .detail-content .row {
+            width: 100%;
+        }
+
+        .itemImage {
+            float: right;
+            position: relative;
+            border: 1px solid #eee;
+        }
+
+        .itemImage img {
+            width: 100%;
+            height: 100%;
+            max-width: 200px;
+            max-height: 200px;
+        }
+
+        .table-details-vertical.left {
+            float: left;
+            width: 80% !important;
+        }
+
+        .table-details-vertical {
+            font-size: 13px;
+            text-align: right;
+            width: 100%;
+        }
+
+        .table-details-vertical td:first-child {
+            border-bottom: #ccc;
+            background-color: #eee;
+            width: 178px;
+        }
+
+        .table-details-vertical td.important {
+            font-weight: bold;
+        }
+
+        .table-details-vertical td + td {
+            text-align: left;
+            background: #fafafa;
+            padding: 2px;
+            padding-left: 10px;
+        }
+
+        .currency:before {
+            content: '$';
+        }
+
+        .currency:after {
+            content: '';
+        }
+
+        div.image-download {
+            max-height: 256px;
+            background-image: url(data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDQ4MC4wODQgNDgwLjA4NCIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgNDgwLjA4NCA0ODAuMDg0OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIgd2lkdGg9IjUxMnB4IiBoZWlnaHQ9IjUxMnB4Ij4KPGc+CgkKCQk8bGluZWFyR3JhZGllbnQgaWQ9IlNWR0lEXzFfIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9Ii0yNi44MzMyIiB5MT0iNTU4LjQxODYiIHgyPSItMjYuODMzMiIgeTI9IjYyMC44MDM2IiBncmFkaWVudFRyYW5zZm9ybT0ibWF0cml4KDggMCAwIC04IDQ1NC43MDcyIDQ5NDEuNzUyOSkiPgoJCTxzdG9wIG9mZnNldD0iMCIgc3R5bGU9InN0b3AtY29sb3I6IzAwNkRGMCIvPgoJCTxzdG9wIG9mZnNldD0iMSIgc3R5bGU9InN0b3AtY29sb3I6IzAwRTdGMCIvPgoJPC9saW5lYXJHcmFkaWVudD4KCTxwYXRoIHN0eWxlPSJmaWxsOnVybCgjU1ZHSURfMV8pOyIgZD0iTTM4NC4wNDIsNDMyLjA4NHYtMTUyYzAtMTMuMjU1LTEwLjc0NS0yNC0yNC0yNGgtMjQwYy0xMy4yNTUsMC0yNCwxMC43NDUtMjQsMjR2MTUyaC0xNnYyNCAgIGMwLDEzLjI1NSwxMC43NDUsMjQsMjQsMjRoMjcyYzEzLjI1NSwwLDI0LTEwLjc0NSwyNC0yNHYtMjRIMzg0LjA0MnogTTExMi4wNDIsMjgwLjA4NGMwLTQuNDE4LDMuNTgyLTgsOC04aDI0MCAgIGM0LjQxOCwwLDgsMy41ODIsOCw4djE1MmgtMjU2VjI4MC4wODR6IE0zODQuMDQyLDQ1Ni4wODRjMCw0LjQxOC0zLjU4Miw4LTgsOGgtMjcyYy00LjQxOCwwLTgtMy41ODItOC04di04aDI4OFY0NTYuMDg0eiIvPgoJCgkJPGxpbmVhckdyYWRpZW50IGlkPSJTVkdJRF8yXyIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiIHgxPSItMjYuODMzMiIgeTE9IjU1OC40MTg2IiB4Mj0iLTI2LjgzMzIiIHkyPSI2MjAuODAzNiIgZ3JhZGllbnRUcmFuc2Zvcm09Im1hdHJpeCg4IDAgMCAtOCA0NTQuNzA3MiA0OTQxLjc1MjkpIj4KCQk8c3RvcCBvZmZzZXQ9IjAiIHN0eWxlPSJzdG9wLWNvbG9yOiMwMDZERjAiLz4KCQk8c3RvcCBvZmZzZXQ9IjEiIHN0eWxlPSJzdG9wLWNvbG9yOiMwMEU3RjAiLz4KCTwvbGluZWFyR3JhZGllbnQ+Cgk8cGF0aCBzdHlsZT0iZmlsbDp1cmwoI1NWR0lEXzJfKTsiIGQ9Ik0xMjAuMDQyLDQyNC4wODRoMjQwdi0xNDRoLTI0MFY0MjQuMDg0eiBNMTM2LjA0MiwyOTYuMDg0aDIwOHYxMTJoLTIwOFYyOTYuMDg0eiIvPgoJCgkJPGxpbmVhckdyYWRpZW50IGlkPSJTVkdJRF8zXyIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiIHgxPSItMjYuODMzMiIgeTE9IjU1OC40MTg2IiB4Mj0iLTI2LjgzMzIiIHkyPSI2MjAuODAzNiIgZ3JhZGllbnRUcmFuc2Zvcm09Im1hdHJpeCg4IDAgMCAtOCA0NTQuNzA3MiA0OTQxLjc1MjkpIj4KCQk8c3RvcCBvZmZzZXQ9IjAiIHN0eWxlPSJzdG9wLWNvbG9yOiMwMDZERjAiLz4KCQk8c3RvcCBvZmZzZXQ9IjEiIHN0eWxlPSJzdG9wLWNvbG9yOiMwMEU3RjAiLz4KCTwvbGluZWFyR3JhZGllbnQ+Cgk8cGF0aCBzdHlsZT0iZmlsbDp1cmwoI1NWR0lEXzNfKTsiIGQ9Ik0xNjAuMDQyLDE2MC4wODRjNC40MTgsMCw4LTMuNTgyLDgtOHMtMy41ODItOC04LThjLTE3LjY3MywwLTMyLTE0LjMyNy0zMi0zMiAgIHMxNC4zMjctMzIsMzItMzJjMi4xMDktMC4wMiw0LjIxNSwwLjE4Niw2LjI4LDAuNjE2YzQuMzE1LDAuOTUsOC41ODMtMS43NzgsOS41MzMtNi4wOTNjMC4xMjUtMC41NjYsMC4xODctMS4xNDQsMC4xODctMS43MjN2LTAuOCAgIGMtMC4wMDktMzAuOTI4LDI1LjA1NS01Ni4wMDgsNTUuOTgzLTU2LjAxN2MyNi42MjQtMC4wMDgsNDkuNTcyLDE4LjczLDU0Ljg4OSw0NC44MTdjMC40NywyLjMwOSwxLjkzMyw0LjI5Myw0LDUuNDI0ICAgYzIuMDY1LDEuMTQzLDQuNTMyLDEuMzA0LDYuNzI4LDAuNDRjMjAuNjItNy45MjcsNDMuNzYyLDIuMzYyLDUxLjY4OSwyMi45ODNzLTIuMzYyLDQzLjc2Mi0yMi45ODMsNTEuNjg5ICAgYy00LjU2NiwxLjc1NS05LjQxNSwyLjY1OC0xNC4zMDcsMi42NjRjLTQuNDE4LDAtOCwzLjU4Mi04LDhzMy41ODIsOCw4LDhjMzAuOTI4LDAsNTYtMjUuMDcyLDU2LTU2cy0yNS4wNzItNTYtNTYtNTYgICBjLTMuOTI1LTAuMDAyLTcuODM5LDAuNDAyLTExLjY4LDEuMjA4QzI4Ny44MSwxMS41NiwyNDcuMDQ3LTguODUxLDIwOS4zMTUsMy43MDFjLTI2LjY2OCw4Ljg3Mi00NS43MzYsMzIuNDQ5LTQ4LjgzMyw2MC4zODNoLTAuNDQgICBjLTI2LjUxLDAtNDgsMjEuNDktNDgsNDhTMTMzLjUzMiwxNjAuMDg0LDE2MC4wNDIsMTYwLjA4NHoiLz4KCQoJCTxsaW5lYXJHcmFkaWVudCBpZD0iU1ZHSURfNF8iIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIiB4MT0iLTI2LjgzMzIiIHkxPSI1NTguNDE4NiIgeDI9Ii0yNi44MzMyIiB5Mj0iNjIwLjgwMzYiIGdyYWRpZW50VHJhbnNmb3JtPSJtYXRyaXgoOCAwIDAgLTggNDU0LjcwNzIgNDk0MS43NTI5KSI+CgkJPHN0b3Agb2Zmc2V0PSIwIiBzdHlsZT0ic3RvcC1jb2xvcjojMDA2REYwIi8+CgkJPHN0b3Agb2Zmc2V0PSIxIiBzdHlsZT0ic3RvcC1jb2xvcjojMDBFN0YwIi8+Cgk8L2xpbmVhckdyYWRpZW50PgoJPHBhdGggc3R5bGU9ImZpbGw6dXJsKCNTVkdJRF80Xyk7IiBkPSJNMjMyLjA0Miw4MC4wODR2MTMyLjY4OGwtMzEuNi0zMS42bC0xMS4zMTIsMTEuMzEybDUwLjkxMiw1MC45MTJsNTAuOTEyLTUwLjkxMiAgIGwtMTEuMzEyLTExLjMxMmwtMzEuNiwzMS42VjgwLjA4NEwyMzIuMDQyLDgwLjA4NHoiLz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8L3N2Zz4K);
+            background-size: 16px;
+            background-repeat: no-repeat;
+            padding-left: 16px;
+        }
+    </style>
     <script type="text/javascript">
-        var Ext = Ext || {}; // Ext namespace won't be defined yet...
+		window.REST = {
+			API_DOMAIN: 'https://api.alegra.pulsejs.io/',
+			API_LIST: 'item',
+			API_GET: 'item/get/',
+			API_POST: 'item/add',
+			API_PUT: 'item/edit/',
+			API_DELETE: 'item/delete/',
+			API_ATTACH: 'item/attach/',
+			API_TAXSES: 'item/taxes',
+			API_CATS: 'item/categories'
+		};
 
-        // This function is called by the Microloader after it has performed basic
-        // device detection. The results are provided in the "tags" object. You can
-        // use these tags here or even add custom tags. These can be used by platform
-        // filters in your manifest or by platformConfig expressions in your app.
-        //
-        Ext.beforeLoad = function (tags) {
-            var s = location.search,  // the query string (ex "?foo=1&bar")
-                profile;
+		var Ext     = Ext || {}; // Ext namespace won't be defined yet...
 
-            // For testing look for "?classic" or "?modern" in the URL to override
-            // device detection default.
-            //
-            if (s.match(/\bclassic\b/)) {
-                profile = 'classic';
-            }
-            else if (s.match(/\bmodern\b/)) {
-                profile = 'modern';
-            }
-            else {
-                profile = tags.desktop ? 'classic' : 'modern';
-                //profile = tags.phone ? 'modern' : 'classic';
-            }
+		// This function is called by the Microloader after it has performed basic
+		// device detection. The results are provided in the "tags" object. You can
+		// use these tags here or even add custom tags. These can be used by platform
+		// filters in your manifest or by platformConfig expressions in your app.
+		//
+		Ext.beforeLoad = function (tags) {
+			var s = location.search,  // the query string (ex "?foo=1&bar")
+				profile;
 
-            Ext.manifest = profile; // this name must match a build profile name
+			// For testing look for "?classic" or "?modern" in the URL to override
+			// device detection default.
+			//
+			if(s.match(/\bclassic\b/)) {
+				profile = 'classic';
+			}
+			else if(s.match(/\bmodern\b/)) {
+				profile = 'modern';
+			}
+			else {
+				profile = tags.desktop ? 'classic' : 'modern';
+				//profile = tags.phone ? 'modern' : 'classic';
+			}
 
-            // This function is called once the manifest is available but before
-            // any data is pulled from it.
-            //
-            //return function (manifest) {
-                // peek at / modify the manifest object
-            //};
-        };
+			Ext.manifest = profile; // this name must match a build profile name
+
+			// This function is called once the manifest is available but before
+			// any data is pulled from it.
+			//
+			//return function (manifest) {
+			// peek at / modify the manifest object
+			//};
+		};
+
     </script>
 
     <!-- The line below must be kept intact for Sencha Cmd to build your application -->

@@ -13,6 +13,7 @@ Ext.application({
 		'Alegra.*',
 		'Alegra.view.inventario.PanelInventario',
 		'Alegra.view.inventario.form.FormItem',
+		'Alegra.view.inventario.form.FormUploadItem',
 		'Alegra.store.taxs.StoreTax',
 		'Alegra.view.inventario.form.ComboTax',
 		'Alegra.store.categories.StoreCategory',
@@ -57,16 +58,4 @@ window.Notify = function (response, status, callback) {
 	});
 
 	(typeof callback === 'function') ? callback() : null;
-};
-
-window.REST = {
-	API_DOMAIN: 'http://localhost:81/',
-	API_LIST: 'AlegraZend/public/item',
-	API_GET: 'AlegraZend/public/item/get/',
-	API_POST: 'AlegraZend/public/item/add',
-	API_PUT: 'AlegraZend/public/item/edit/',
-	API_DELETE: 'AlegraZend/public/item/delete/',
-	API_ATTACH: 'AlegraZend/public/item/attach/',
-	API_TAXSES: 'AlegraZend/public/item/taxes',
-	API_CATS: 'AlegraZend/public/item/categories'
 };

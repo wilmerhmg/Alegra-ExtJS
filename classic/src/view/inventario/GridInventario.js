@@ -50,29 +50,18 @@ Ext.define('Alegra.view.inventario.GridInventario', {
 				xtype: 'actioncolumn',
 				text: 'Options',
 				width: 80,
-				styleBody: 'text-aling:center !important',
 				items: [{
-					iconCls: 'x-fa fa-eye',
-					tooltip: 'View in detail',
-					id: 'item-view',
-					handler: function (grid, rowIndex, colIndex) {
-						let rec = grid.getStore().getAt(rowIndex);
-						alert("Edit " + rec.get('id'));
-					}
-				}, {
 					iconCls: 'x-fa fa-pencil',
 					tooltip: 'Edit',
 					id: 'item-id'
 				}, {
 					iconCls: 'x-fa fa-paperclip',
 					tooltip: 'Upload attachment',
-					handler: function (grid, rowIndex, colIndex) {
-						let rec = grid.getStore().getAt(rowIndex);
-						alert("Edit " + rec.get('id'));
-					}
+					id: 'item-attach'
 				}, {
 					iconCls: 'x-fa fa-trash',
-					tooltip: 'Delete'
+					tooltip: 'Delete',
+					id: 'item-delete'
 				}]
 			}],
 			dockedItems: [{

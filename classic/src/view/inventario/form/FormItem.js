@@ -81,13 +81,12 @@ Ext.define('Alegra.view.inventario.form.FormItem', {
 		});
 		let ItemForm = this.up('window');
 		let data     = this.getForm().getValues();
-		console.log('id:', data, typeof data);
+
 		loadMask.show();
 		this.getForm().submit({
 			url: REST.API_DOMAIN + ((data.id.length) ? (REST.API_PUT + data.id) : REST.API_POST),
 			scope: this,
 			success: function (form, result) {
-				console.info(result);
 				loadMask.hide();
 				ItemForm.close();
 				grid.getStore().load();
@@ -98,6 +97,7 @@ Ext.define('Alegra.view.inventario.form.FormItem', {
 				loadMask.hide();
 				(sts === 201 || sts === 200) ? ItemForm.close() : null;
 				(sts === 201 || sts === 200) ? grid.getStore().load() : null;
+
 			}
 		});
 	},
