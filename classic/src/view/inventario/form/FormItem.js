@@ -85,6 +85,7 @@ Ext.define('Alegra.view.inventario.form.FormItem', {
 		loadMask.show();
 		this.getForm().submit({
 			url: REST.API_DOMAIN + ((data.id.length) ? (REST.API_PUT + data.id) : REST.API_POST),
+			headers: {'Access-Control-Allow-Origin': REST.API_DOMAIN},
 			scope: this,
 			success: function (form, result) {
 				loadMask.hide();
@@ -93,7 +94,7 @@ Ext.define('Alegra.view.inventario.form.FormItem', {
 			},
 			failure: function (form, result) {
 				console.log(result);
-				let sts = result.response.status;
+				let sts = result.result.code || result.response.status;
 				Notify(Ext.decode(result.response.responseText), sts);
 				loadMask.hide();
 				(sts === 201 || sts === 200) ? ItemForm.close() : null;

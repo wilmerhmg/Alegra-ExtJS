@@ -29,6 +29,7 @@ Ext.define('Alegra.view.inventario.form.FormUploadItem', {
 		this.getForm().submit({
 			url: REST.API_DOMAIN + REST.API_ATTACH + data.id,
 			scope: this,
+			headers: {'Access-Control-Allow-Origin': REST.API_DOMAIN},
 			success: function (form, result) {
 				console.info(result);
 				loadMask.hide();
