@@ -92,6 +92,7 @@ Ext.define('Alegra.view.inventario.form.FormItem', {
 				grid.getStore().load();
 			},
 			failure: function (form, result) {
+				console.log(result);
 				let sts = result.result.code || result.response.status;
 				Notify(Ext.decode(result.response.responseText), sts);
 				loadMask.hide();
