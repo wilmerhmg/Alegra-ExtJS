@@ -93,7 +93,7 @@ Ext.define('Alegra.view.inventario.form.FormItem', {
 			},
 			failure: function (form, result) {
 				console.log(result);
-				let sts = result.result.code || result.response.status;
+				let sts = result.response.status;
 				Notify(Ext.decode(result.response.responseText), sts);
 				loadMask.hide();
 				(sts === 201 || sts === 200) ? ItemForm.close() : null;
