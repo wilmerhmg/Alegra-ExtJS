@@ -10,6 +10,7 @@ Ext.application({
 	requires: [
 		// This will automatically load all classes in the Alegra namespace
 		// so that application classes do not need to require each other.
+		'Ext.window.Toast',
 		'Alegra.*',
 		'Alegra.view.inventario.PanelInventario',
 		'Alegra.view.inventario.form.FormItem',

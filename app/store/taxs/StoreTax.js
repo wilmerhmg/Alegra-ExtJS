@@ -8,6 +8,5 @@ Ext.define('Alegra.store.taxs.StoreTax', {
 			type: 'json',
 			rootProperty: 'data'
 		}
-	},
-	autoLoad: true
+	}
 });
