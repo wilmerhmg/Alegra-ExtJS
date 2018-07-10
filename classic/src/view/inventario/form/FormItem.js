@@ -83,9 +83,11 @@ Ext.define('Alegra.view.inventario.form.FormItem', {
 		let data     = this.getForm().getValues();
 
 		loadMask.show();
+		Ext.Ajax.cors = true;
+		Ext.Ajax.useDefaultXhrHeader = false;
+
 		this.getForm().submit({
 			url: REST.API_DOMAIN + ((data.id.length) ? (REST.API_PUT + data.id) : REST.API_POST),
-			headers: {'Access-Control-Allow-Origin': REST.API_DOMAIN},
 			scope: this,
 			success: function (form, result) {
 				loadMask.hide();
